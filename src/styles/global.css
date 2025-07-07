@@ -69,6 +69,42 @@
 	.title {
 		@apply text-accent-2 text-2xl font-semibold;
 	}
+
+	/* Timeline vertical line container */
+	.timeline {
+		@apply relative pl-6 border-l-4 border-accent;
+	}
+
+	/* Each timeline item */
+	.timeline-item {
+	@apply relative pl-6 mb-6 list-none; /* remove default bullet */
+	}
+
+	/* Optional: clean bullet points inside detail lists */
+	.timeline-item ul {
+		@apply list-none pl-0;
+	}
+
+	.timeline-item ul li::before {
+		content: "•";
+		display: inline-block;
+		width: 1em;
+		margin-left: -1em;
+	}
+
+	.timeline-item::before {
+	content: "";
+	position: absolute;
+	left: -2.1rem; /* Shift left by 8px */
+	top: 0.35rem;    /* Adjust vertically to center */
+	width: 0.6rem; /* 12px */
+	height: 0.6rem;
+	background-color: var(--color-accent);
+	border-radius: 9999px;
+	border: 3px solid white;
+	box-sizing: content-box;
+	z-index: 10;
+	}
 }
 
 @utility prose {

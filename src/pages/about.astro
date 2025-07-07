@@ -2,35 +2,133 @@
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "I'm a starter theme for Astro.build",
-	title: "About",
+  description: "My full profile",
+  title: "About Me",
 };
----
 
+// 👇 Data
+const intro = `Hello! I'm Jeason Paul, a passionate software engineer with a love for embedded systems and space technology.`;
+
+const skills = [
+  { category: "Languages", items: ["C", "C++", "Python", "Bash"] },
+  { category: "Embedded Platforms", items: ["ARM Cortex-M", "Raspberry Pi", "Arduino", "STM32"] },
+  { category: "RTOS/OS", items: ["Zephyr RTOS", "Embedded Linux", "FreeRTOS"] },
+  { category: "Protocols/Interfaces", items: ["Bluetooth Mesh", "SPI", "I2C", "UART"] },
+  { category: "Tools", items: ["Git", "Jira", "Confluence", "ROS", "Gazebo", "OpenCV", "AWS IoT", "Docker"] },
+  { category: "Testing", items: ["Unit Testing", "Integration Testing"] },
+  { category: "Agile", items: ["Scrum", "Sprint Planning", "Retrospectives", "Requirement Analysis", "Design and Documentation"] },
+  { category: "Debugging", items: ["JTAG", "SWD"] },
+];
+
+const experience = [
+  {
+    year: "2023 - 2025",
+    company: "Invent Design Build",
+    role: "Embedded Software Engineer",
+    details: [
+		"Developed and integrated 100% of the Linux stack for managing data and algorithms, integrating seamlessly with AWS IoT Core for cloud-based reporting and monitoring.",
+		"Used Buildroot to create a Custom Linux version for an off-the-shelf hardware board.",
+		"Single-handedly prototyped a person tracking system using Zephyr RTOS, Bluetooth Mesh and Nordic nrf ARM based chips, achieving over 90% accuracy in location tracking.",
+		"Optimized battery life of tracking tags, ensuring a 6+ months operational lifespan per tag.",
+		"Authored Python-based test scripts for black-box testing the complete system, achieving 95%+ test coverage for quality assurance.",
+		"Gained extensive experience in analyzing System Requirements, designing robust software architectures, and creating design intent documentation.",
+		"Got advanced proficiency in Git, including managing pull requests, code reviews, and maintaining version control best practices"
+    ],
+  },
+  {
+    year: "2020 - 2022",
+    company: "Gadegon",
+    role: "Embedded Software Engineer",
+    details: [
+      "Added Alexa Voice Search into a Raspberry Pi Powered Smart Mirror",
+      "Developed real-time control software for Raspberry pi in C for a seawater purification system, managing sensors, actuators, and a MySQL database to report system status.",
+    ],
+  },
+];
+
+const certifications = [
+  {
+    name: "Mastering RTOS: Hands on FreeRTOS and STM32Fx with Debugging - 09/04/2024",
+    url: "https://www.udemy.com/certificate/UC-fca55064-be94-4842-aa73-8705f004a421/",
+  },
+];
+
+const education = [
+  {
+    degree: "Master’s Degree in Robotics and AI",
+    school: "University of Glasgow, UK",
+    year: "2022 - 2023",
+  },
+  {
+    degree: "Bachelor’s Degree in Electronics and Communication",
+    school: "KTU, India",
+    year: "2016 - 2020",
+  }
+];
+---
 <PageLayout meta={meta}>
-	<h1 class="title mb-6">About</h1>
-	<div class="prose prose-sm prose-cactus max-w-none">
-		<p>
-			Hi, I’m a starter Astro. I’m particularly great for getting you started with your own blogging
-			website.
-		</p>
-		<p>Here are my some of my awesome built in features:</p>
-		<ul class="list-inside list-disc" role="list">
-			<li>I'm ultra fast as I'm a static site</li>
-			<li>I'm fully responsive</li>
-			<li>I come with a light and dark mode</li>
-			<li>I'm easy to customise and add additional content</li>
-			<li>I have Tailwind CSS styling</li>
-			<li>Shiki code syntax highlighting</li>
-			<li>Satori for auto generating OG images for blog posts</li>
+  <h1 class="title mb-8">About Me</h1>
+
+  <!-- Intro -->
+  <section>
+    <p class="mb-4">{intro}</p>
+  </section>
+
+	<!-- Skills -->
+	<section>
+	<h2 class="title text-accent mb-4 text-xl">Skills</h2>
+	<ul class="mb-4">
+		{skills.map(skill => (
+		<li>
+			<span class="font-semibold">{skill.category}:</span> {skill.items.join(", ")}
+		</li>
+		))}
+	</ul>
+	</section>
+
+	<!-- Experience --><!-- Experience with timeline -->
+	<section>
+		<h2 class="title text-accent mb-6 text-xl">Experience</h2>
+		<ul class="timeline">
+		{experience.map(item => (
+			<li class="timeline-item">
+			<div class="text-lg font-bold text-accent">{item.year}</div>
+			<div class="font-semibold">{item.company}</div>
+			<div class="italic mb-1">{item.role}</div>
+			<ul class="pl-6">
+				{item.details.map(detail => <li>{detail}</li>)}
+			</ul>
+			</li>
+		))}
 		</ul>
-		<p>
-			Clone or fork my <a
-				class="cactus-link inline-block"
-				href="https://github.com/chrismwilliams/astro-cactus"
-				rel="noreferrer"
-				target="_blank">repo</a
-			> if you like me!
-		</p>
-	</div>
+	</section>
+
+	<!-- Education -->
+	<section>
+		<h2 class="title text-accent mb-6 text-xl">Education</h2>
+		<ul class="timeline">
+		{education.map(item => (
+			<li class="timeline-item">
+			<div class="text-lg font-bold text-accent">{item.year}</div>
+			<div class="font-semibold">{item.degree}</div>
+			<div class="italic mb-1">{item.school}</div>
+			</li>
+		))}
+		</ul>
+	</section>
+  <!-- Certifications -->
+  <section class="mb-8 prose-cactus max-w-none">
+    <h2 class="title text-accent mb-6 text-xl">Certifications</h2>
+  <ul class="list-disc pl-5">
+    {certifications.map(cert => (
+      <li>
+        <a href={cert.url} target="_blank" rel="noopener noreferrer" class= "hover:underline">
+          {cert.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+  </section>
+
+  </section>
 </PageLayout>
